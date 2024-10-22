@@ -1,0 +1,38 @@
+# copy file to AWS bucket
+aws s3 cp TheHeronry.m4a s3://insig-transcribe/test/TheHeronry.m4a
+aws s3 ls s3://insig-transcribe/steve/TheHeronry.m4a
+
+# check status
+aws transcribe get-transcription-job --transcription-job-name "Steve_2"
+{
+    "TranscriptionJob": {
+        "TranscriptionJobName": "Steve_2",
+        "TranscriptionJobStatus": "IN_PROGRESS",
+        "LanguageCode": "en-GB",
+        "MediaSampleRateHertz": 48000,
+        "MediaFormat": "mp4",
+        "Media": {
+            "MediaFileUri": "s3://insig-transcribe/steve/TheHeronry2.m4a"
+        },
+        "Transcript": {},
+        "StartTime": 1729596923.217,
+        "CreationTime": 1729596923.195,
+        "Settings": {
+            "ShowSpeakerLabels": true,
+            "MaxSpeakerLabels": 2,
+            "ChannelIdentification": false,
+            "ShowAlternatives": false
+        }
+    }
+}
+
+aws transcribe start-transcription-job help
+
+start-transcription-job
+     --transcription-job-name <string>
+     --language-code en-GB
+     --media-format m4a
+     --media <value>
+     --output-bucket-name <value>
+     --output-key <value>
+     --settings ShowSpeakerLabels=boolean,MaxSpeakerLabels=integer,ChannelIdentification=boolean
